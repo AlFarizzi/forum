@@ -1,0 +1,47 @@
+.card__container {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding:10px;
+    box-shadow: 0 0 5px rgb(190, 190, 190);
+}
+
+.header {
+    padding:10px;
+    display: flex;
+}
+
+.img__profile {
+    object-fit: contain;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.user__profile {
+    padding:5px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user__name {
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.user__username {
+    color: #636466;
+}
+
+.content__ {
+    /* border:1px solid red; */
+    font-size: 15px;
+    font-family: sans-serif;
+    margin-top: -10px;
+    padding:10px;
+    word-spacing: 3px;
+    line-height: 1.25rem
+}
+

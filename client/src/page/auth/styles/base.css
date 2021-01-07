@@ -1,0 +1,90 @@
+.base__container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-image: url("https://qsf.fs.quoracdn.net/-4-images.home.illo_1920.png-26-e9e6fbe02d908942.png");
+    background-size: cover;
+}
+.button__register {
+    position: absolute;
+    top: 63.5%;
+    margin-left: 10px;
+    border: 0;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background-color: rgb(185,43,39,1);
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #fff;
+}
+.button__login {
+    position: absolute;
+    top: 75%;
+    left: 35%;
+    margin-left: 10px;
+    border: 0;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background-color: rgb(185,43,39,1);
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #fff;
+}
+@media screen and (min-width:360px) {
+    .button__register {
+        top: 61.25%;
+    }
+    .button__login {
+        top: 74.75%;
+        left: 30%;
+    }
+}
+@media screen and (min-width:411px) {
+    .button__register {
+        top: 60.25%;
+    }
+    .button__login {
+        top: 71.8%;
+        left: 27%;
+    }
+}
+@media screen and (min-width:411px) and (min-height:823px) {
+    .button__register {
+        top: 59%;
+    }
+    .button__login {
+        top: 69.35%;
+        left: 27%;
+    }
+}
+@media screen and (min-width:768px) and (min-height:1024px) {
+    .button__register {
+        top: 59%;
+        left: 43%;
+    }
+    .button__login {
+        top: 66%;
+        left: 16%;
+    }
+}
+@media screen and (min-width:768px) and (min-height:1520px) {
+    .button__register {
+        top: 59.75%;
+        left: 44%;
+    }
+    .button__login {
+        top: 64%;
+        left: 13%;
+    }
+}
+@media screen and (min-width:1300px) {
+    .button__register {
+        top: 61.65%;
+    }
+    .button__login {
+        top: 75.85%;
+        left: 35%;
+    }
+}

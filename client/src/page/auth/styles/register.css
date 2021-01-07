@@ -1,0 +1,111 @@
+.register__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px 0;
+    width: 45%;
+    height: 350px;
+    background-color: #fff;
+    box-shadow: 0 0 5px #888;
+}
+.register__form {
+    padding: 10px;
+}
+.register__form:first-child > .register__input {
+    margin: 10px;
+    height: 25px;
+    padding: 3px 10px;
+    background-color: #eee;
+    border: 0;
+}
+.form__group {
+    padding: 20px;
+}
+.form__group > .register__input {
+    height: 25px;
+    width: 90%;
+    padding: 3px 10px;
+    background-color: #eee;
+    border: 0;
+}
+.register__button {
+    margin-left: 20px;
+    border: 0;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background-color: rgb(185,43,39,1);
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #fff;
+}
+@media screen and (min-width:360px) {
+    .register__container {
+        width: 95%;
+    }
+    .login__logo {
+        min-width: 100px;
+    }
+    .login__slogan {
+        font-size: 12px;
+    }
+    .register__form {
+        padding: 5px;
+    }
+    .form__group {
+        padding: 10px 15px;
+    }
+    .register__form:first-child > .register__input {
+        width: 90%;
+    }
+    .form__group > .register__input {
+        width: 95%;
+    }
+    .register__button {
+        margin-top: 15px;
+    }
+}
+@media screen and (min-width:411px) {
+    .login__slogan {
+        font-size: 13px;
+    }
+    .form__group > .register__input {
+        width: 93%;
+    }
+}
+@media screen and (min-width:768px) and (min-height:1024px) {
+    .login__slogan {
+        font-size: 20px;
+    }
+}
+@media screen and (min-width:1358px) {
+    .register__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 50px 0;
+        width: 45%;
+        height: 350px;
+        background-color: #fff;
+        box-shadow: 0 0 5px #888;
+    }
+    .register__form {
+        padding: 10px;
+    }
+    .register__form:first-child > .register__input {
+        margin: 10px;
+        height: 25px;
+        padding: 3px 10px;
+        background-color: #eee;
+        border: 0;
+    }
+    .form__group {
+        padding: 10px 20px;
+    }
+    .form__group > .register__input {
+        height: 25px;
+        width: 90%;
+        padding: 3px 10px;
+        background-color: #eee;
+        border: 0;
+    }
+}

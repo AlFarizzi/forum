@@ -5,6 +5,7 @@
     background-color: white;
     padding:10px;
     box-shadow: 0 0 5px rgb(190, 190, 190);
+    margin-top: 20px;
 }
 
 .header {
@@ -45,3 +46,13 @@
     line-height: 1.25rem
 }
 
+@media screen and (min-width:360px) {
+    .card__container {
+        width: 90%;
+    }
+}
+@media screen and (min-width:720px) {
+    .card__container {
+        width: 60%;
+    }
+}

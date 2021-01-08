@@ -1,0 +1,48 @@
+.sidebar__container {
+    width: 18%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.rooms {
+    padding:10px;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-evenly; */
+    width: 70%;
+    margin-top: 2%;
+}
+
+.room__images {
+    object-fit: contain;
+    width: 25px;
+    border-radius: 10px;
+}
+
+.rooms:hover {
+    background-color:  rgba(231, 234, 234, 0.644);
+}
+
+.room__name {
+    font-family: sans-serif;
+    margin-left: 5%;
+    font-size: 12px;
+}
+
+@media screen and (min-width:360px) {
+    .sidebar__container {
+        display: none;
+    }
+}
+
+@media screen and (min-width:720px) {
+    .sidebar__container {
+        display: initial;
+    }
+}
+
+@media screen and (min-width:1000px) {
+    .sidebar__container {
+        display: initial;
+    }
+}

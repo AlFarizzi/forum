@@ -69,14 +69,14 @@
         left: 16%;
     }
 }
-@media screen and (min-width:768px) and (min-height:1520px) {
+@media screen and (min-width:760px) and (min-height:1500px) {
     .button__register {
-        top: 59.75%;
+        top: 56%;
         left: 44%;
     }
     .button__login {
-        top: 64%;
-        left: 13%;
+        top: 60.95%;
+        left: 17%;
     }
 }
 @media screen and (min-width:1300px) {

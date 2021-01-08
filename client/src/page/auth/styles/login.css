@@ -5,6 +5,7 @@
     height: 300px;
     background-color: #fff;
     box-shadow: 0 0 5px #888;
+    position: relative;
 }
 .top__logo {
     display: flex;

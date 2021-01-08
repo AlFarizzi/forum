@@ -1,11 +1,9 @@
 .home__container {
     display: flex;
-    position: relative;
-    /* justify-content: space-evenly; */
+    justify-content: space-evenly;
     padding:30px;
 }
-/* *{border:1px solid red;} */
+
 .threads {
-    display: inline-block;
-    width: fit-content;
+    width: 90%;
 }

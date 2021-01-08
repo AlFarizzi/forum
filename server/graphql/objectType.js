@@ -3,6 +3,14 @@ const {GraphQLObjectType, GraphQLList, GraphQLInt, GraphQLString, GraphQLNonNull
 const {addUser,getUsers} = require("../controllers/userController");
 const { getArticles, addArticle } = require("../controllers/articleController");
 
+let users;
+let articles;
+
+getUsers()
+.then(res => users = res)
+getArticles()
+.then(res => articles = res)
+
 const UserType = new GraphQLObjectType({
     name: "Users",
     fields: () => ({
@@ -22,14 +30,14 @@ const UserType = new GraphQLObjectType({
 const ArticleType = new GraphQLObjectType({
     name: "Articles",
     fields: () => ({
-        id: {type:new GraphQLNonNull(GraphQLInt)},
-        authorId: {type:new GraphQLNonNull(GraphQLInt)},
-        title: {type: new GraphQLNonNull(GraphQLString)},
-        article: {type: new GraphQLNonNull(GraphQLString)},
+        id: {type: GraphQLInt},
+        title: {type: GraphQLString},
+        article: {type: GraphQLString},
+        authorId: {type: GraphQLInt},
         author: {
-            type: UserType,
+            type:UserType,
             resolve: (parent) => {
-               return users.find(user => user.id === parent.authorId)
+                return users.find(user => user.id === parent.authorId)
             }
         }
     })

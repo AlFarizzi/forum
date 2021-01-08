@@ -2,23 +2,45 @@ import React from 'react';
 import './styles/base.css';
 import Sidebar from './partials/Sidebar';
 import Card from './partials/Card';
+import gql from 'graphql-tag';
+import {Query} from 'react-apollo';
 function Base(props) {
+    const GET_ARTICLES = gql `
+    {
+        articles {
+            id
+            article
+            author {
+                name
+                username
+            }
+        }
+    }
+    `
     return (
         <div className="home__container">
             <Sidebar/>
             <div className="threads">
-            <Card
-                img="https://qph.fs.quoracdn.net/main-thumb-1400868774-200-weiqnlfvbutadfotdzhgtddppohfzcjj.jpeg"
-                name="Nindya Yulieva"
-                username="S1 dari Universitas Negeri" thread="Pernah.1,5jt. Sebenarnya isu tentang mata2 lamtur yang di bayar per foto itu udah pernah di bahas oleh beberapa akun Twitter. Jadi tahun 2019 saya dan Kakak sepupu saya nonton di XXI bintaro. Waktu itu kami berdua lagi"/>
-            <Card
-                img="https://qph.fs.quoracdn.net/main-thumb-1400868774-200-weiqnlfvbutadfotdzhgtddppohfzcjj.jpeg"
-                name="Nindya Yulieva"
-                username="S1 dari Universitas Negeri" thread="Pernah.1,5jt. Sebenarnya isu tentang mata2 lamtur yang di bayar per foto itu udah pernah di bahas oleh beberapa akun Twitter. Jadi tahun 2019 saya dan Kakak sepupu saya nonton di XXI bintaro. Waktu itu kami berdua lagi"/>
+                <Query query={GET_ARTICLES}>
+                    {
+                        ({loading, data}) => !loading && (data.articles.map((article, key) => {
+                            return (
+                                <Card
+                                    key={key}
+                                    img="https://qph.fs.quoracdn.net/main-thumb-1400868774-200-weiqnlfvbutadfotdzhgtddppohfzcjj.jpeg"
+                                    name={article.author?.name}
+                                    username={article.author?.username}
+                                    thread={article.article}
+                                    />
+                            )
+                        }))
+                    }
+
+                </Query>
 
             </div>
-       
-            </div>
+
+        </div>
     );
 }
 

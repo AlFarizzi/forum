@@ -24,7 +24,7 @@ const UserType = new GraphQLObjectType({
                 return articles.filter(article => article.authorId === parent.id);
             }
         }
-    })
+    }),
 })
 
 const ArticleType = new GraphQLObjectType({

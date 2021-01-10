@@ -1,6 +1,30 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import "./styles/login.css";
+// import {DataContainer} from '../../util/DataLayout';
+import {login} from './controller/AuthController';
+import { useHistory } from 'react-router-dom';
+import {user} from '../../util/atom';
+import { useRecoilState } from 'recoil';
 function Login(props) {
+    const [username,setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [userData,setUserData] = useRecoilState(user);
+    const history = useHistory();
+   const submitHandler = async (e) => {
+       e.preventDefault()
+       try {
+            let res = await login(username,password);
+            if(res.data.token) {
+                setUserData({
+                    ...userData, id: res.data.data.id, name: res.data.data.name,
+                    username: res.data.data.username, token: res.data.token
+                })
+                history.push("/home");
+            }
+        } catch (error) {
+            throw error
+        }
+    }
     return (
         <div className="login__container">
             <div className="top__logo">
@@ -8,12 +32,12 @@ function Login(props) {
                 <small className="login__slogan">Tempat berbagi pengetahuan dan memahami dunia lebih baik</small>
             </div>
             <div className="bottom__form">
-                <form action="">
+                <form onSubmit={submitHandler}>
                     <div className="form-group">
-                        <input type="text" name="" id="" className="login__input" placeholder="Username"/>
+                        <input type="text" onChange={(e) => {setUsername(e.target.value)}} className="login__input" placeholder="Username"/>
                     </div>
                     <div className="form-group">
-                        <input type="text" name="" id="" className="login__input" placeholder="Password"/>
+                        <input type="password" onChange={(e) => {setPassword(e.target.value)}} className="login__input" placeholder="Password"/>
                     </div>
                     <button type="submit" className="login__button">Sign-in</button>
                 </form>

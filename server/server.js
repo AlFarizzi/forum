@@ -5,6 +5,8 @@ const {GraphQLSchema} = require("graphql");
 const {Root, RootMutation} = require("./graphql/query");
 const app = new express();
 const cors = require("cors");
+const {login, register} = require("./controllers/authentication");
+const bodyParser = require("body-parser")
 
 const schema = new GraphQLSchema({
     query: Root,
@@ -16,7 +18,18 @@ app.use(cors({
     optionsSuccessStatus: 200
 }));
 
-app.use("/graphql", graphqlHTTP({
+app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.json());
+
+app.post("/login", login);
+app.post('/register',register)
+
+const tes = (req,res,next) => {
+    console.log("asd");
+    next()
+}
+
+app.use("/graphql",tes, graphqlHTTP({
     schema:schema,
     graphiql: true,
 }))

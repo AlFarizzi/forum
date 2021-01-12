@@ -1,21 +1,13 @@
-const model = require("../models");
+const models = require("../models");
+const { Sequelize } = require("../models");
 
-const getArticles = () => {
-   return model.Article.findAll()
-}
-
-const addArticle = async({authorId,title,article}) => {
+const getArticles = async (req,res) => {
     try {
-        let res = await model.Article.create({
-            authorId: authorId,
-            title:title,
-            article:article,
-            createdAt: new Date(),
-            updatedAt: new Date()
-        })
+        let articles = await models.Article.findAll({order: Sequelize.literal("rand()"),include: ["author"]});
+        res.json(articles);
     } catch (error) {
         throw error
     }
 }
 
-module.exports = {getArticles, addArticle}
+module.exports = {getArticles};

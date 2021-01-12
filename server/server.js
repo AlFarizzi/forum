@@ -1,17 +1,14 @@
 const express = require("express");
 const model = require("./models");
-const {graphqlHTTP} = require("express-graphql");
-const {GraphQLSchema} = require("graphql");
-const {Root, RootMutation} = require("./graphql/query");
 const app = new express();
 const cors = require("cors");
-const {login, register} = require("./controllers/authentication");
+const {login, register, storeAuth, newToken} = require("./controllers/authentication");
 const bodyParser = require("body-parser")
+const compression = require("compression")
+const Articles = require("./router/article");
 
-const schema = new GraphQLSchema({
-    query: Root,
-    mutation: RootMutation
-});
+
+app.use(compression());
 
 app.use(cors({
     origin: "http://localhost:3000",
@@ -23,17 +20,11 @@ app.use(bodyParser.json());
 
 app.post("/login", login);
 app.post('/register',register)
+app.post("/authenticated", storeAuth)
+app.post('/new-token', newToken)
 
-const tes = (req,res,next) => {
-    console.log("asd");
-    next()
-}
+app.use('/articles', Articles)
 
-app.use("/graphql",tes, graphqlHTTP({
-    schema:schema,
-    graphiql: true,
-}))
-
-app.listen(5000, () => {
+app.listen(9000, () => {
     console.log("Server is Connected");
 })

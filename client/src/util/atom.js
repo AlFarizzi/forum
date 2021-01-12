@@ -5,6 +5,7 @@ export const user = atom({
     default :{
         id: "",
         token: "",
+        refreshToken:"",
         username: "",
         name: "",
     }

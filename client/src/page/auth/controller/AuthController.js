@@ -1,5 +1,4 @@
 import axios from '../../../util/axios';
-import { useLayoutEffect } from 'react';
 
 export const login = async(username,password) => {
     // e.preventDefault();

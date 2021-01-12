@@ -4,17 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom'; 
-import {ApolloProvider} from 'react-apollo';
-import client from './util/graphql';
 import {RecoilRoot} from 'recoil';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <ApolloProvider client={client}>
       <RecoilRoot>
           <App />
       </RecoilRoot>
-    </ApolloProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

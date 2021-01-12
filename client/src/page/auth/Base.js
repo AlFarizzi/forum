@@ -13,20 +13,9 @@ function Base(props) {
         <div className="base__container">
             {
                 page === "login"
-                    ? <Login/>
-                    : <Register/>
+                    ? <Login change={clickHandler}/>
+                    : <Register change={clickHandler}/>
             }
-            <button
-                className={page === "login"
-                    ? "button__register"
-                    : "button__login" }
-                onClick={clickHandler}>
-                    {
-                        page === "login"
-                        ? "Register"
-                        : "Login"
-                    }
-                </button>
         </div>
     );
 }

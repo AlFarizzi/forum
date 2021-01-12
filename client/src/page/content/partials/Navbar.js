@@ -25,7 +25,7 @@ function Navbar(props) {
             </ul>
             <input type="text" className="first__searchbar search__bar" placeholder="Cari"/>
             <FiGlobe fontSize={30} className="global__icon"/>
-            <button className="add__question">Tambah Pertanyaan</button>
+            <button className="add__question" onClick={props.show}>Tambah Pertanyaan</button>
         </div>
     );
 }

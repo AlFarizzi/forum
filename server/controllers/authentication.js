@@ -4,6 +4,7 @@ const models = require("../models");
 const saltRounds = 10;
 require("dotenv").config()
 
+
 const check = async(username) => {
     try {
         let check = await models.User.findOne({
@@ -24,8 +25,12 @@ const login = async (req,res) => {
             bcrypt.compare(req.body.password,user.password, (err,result) => {
                 if(result) {
                     jwt.sign(user.username,process.env.SECRET_TOKEN, (err,token) => {
-                        res.json({
-                            data:user,token:token
+                        if (err) throw err
+                        jwt.sign(user.username,process.env.REFRESH_SECRET_TOKEN, (err,rToken) => {
+                            if(err) throw err;
+                            res.json({
+                                data:user,token:token,rToken:rToken
+                            })
                         })
                     })
                 } else {
@@ -36,7 +41,7 @@ const login = async (req,res) => {
             })
         } else {
             res.json({
-                status: "Akun Ini Tidak Terdaftar"
+                message: "Akun Ini Tidak Terdaftar"
             })
         }
     } catch (error) {
@@ -73,4 +78,43 @@ const register= async(req,res) => {
     }
 }
 
-module.exports = {login,register}
+const storeAuth = async(req,res) => {
+    try {
+        let response = await models.Authenticated.create({
+            refresh_token: req.body.refresh_token,
+            user_id: req.body.userId,
+            name: req.body.name,
+            username: req.body.username
+        })
+    } catch (error) {
+        throw error
+    }
+}
+
+const genToken = ({refresh_token,name}) => {
+   let newSecretToken =  jwt.sign(name,process.env.SECRET_TOKEN)
+    return newSecretToken
+}
+
+const newToken = async(req,res) => {
+    try {
+        const {token} = req.body;
+        let check = await models.Authenticated.findOne({
+            where:{
+                refresh_token : token
+            }
+        })
+        const getNewToken = await genToken(check);
+        const newData = {...check.dataValues, token:getNewToken};
+        setTimeout(() => {
+            models.Authenticated.destroy({
+                where: {refresh_token : token}
+            })
+        },3500);
+        res.json(newData);
+    } catch (error) {
+        throw error;
+    }
+}
+
+module.exports = {login,register, storeAuth, newToken}

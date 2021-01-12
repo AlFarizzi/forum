@@ -10,10 +10,14 @@ function Register(props) {
     const history = useHistory();
     const submitHandler = async(e) => {
         e.preventDefault();
-        let res = await register(username,name,password,passwordConfirmation)
-        if(res.status === 200) history.push("/")
+        if(name && username && password && passwordConfirmation) {
+            let res = await register(username,name,password,passwordConfirmation)
+            if(res.status === 200) history.go("/")
+            alert(res.message)
+        } else {
+            alert("Isi Data Dengan Lengkap")
+        }
     }
-
     return (
         <div className="register__container">
               <div className="top__logo">
@@ -23,16 +27,17 @@ function Register(props) {
         <div className="form">
             <form onSubmit={submitHandler}>
                 <div className="register__form">
-                    <input type="text" onChange={(e) => {setName(e.target.value)}}  className="register__input" placeholder="Nama"/>
-                    <input type="text" onChange={(e) => {setUsername(e.target.value)}} className="register__input" placeholder="Username"/>
+                    <input required type="text" onChange={(e) => {setName(e.target.value)}}  className="register__input" placeholder="Nama"/>
+                    <input required type="text" onChange={(e) => {setUsername(e.target.value)}} className="register__input" placeholder="Username"/>
                 </div>
                 <div className="form__group">
-                    <input type="password" onChange={(e) => {setPassword(e.target.value)}} className="register__input" placeholder="Sandi"/>
+                    <input required type="password" onChange={(e) => {setPassword(e.target.value)}} className="register__input" placeholder="Sandi"/>
                 </div>
                 <div className="form__group">
-                    <input type="password" onChange={(e) => {setPasswordConfirmation(e.target.value)}} className="register__input" placeholder="Konfirmasi Sandi"/>
+                    <input required type="password" onChange={(e) => {setPasswordConfirmation(e.target.value)}} className="register__input" placeholder="Konfirmasi Sandi"/>
                 </div>
                 <button type="submit" className="register__button">Register</button>
+                <button type="submit" className="register__button" onClick={props.change}>Login</button>
             </form>
         </div>
     </div>

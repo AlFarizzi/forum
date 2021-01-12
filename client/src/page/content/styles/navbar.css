@@ -69,6 +69,12 @@ a {
     display: none;
 }
 
+.add__question:hover {
+    cursor: pointer;
+    background-color: #ee3933;
+
+}
+
 @media screen and (min-width:360px) {
 
     .navbar__container {
@@ -91,11 +97,17 @@ a {
 
     .nav__item {
         padding:10px;
+        width: 150px;
     }
 
     .second__searchbar {
         margin-top: 3%;
         margin-bottom: 3%;
+        width: 90%;
+    }
+
+    .second__searchbar > .search__bar {
+        width: 90%;
     }
 
     .first__searchbar,.add__question,.global__icon {
@@ -105,27 +117,28 @@ a {
     .toggle {
         display: inline;
     }
-
 }
 
 @media screen and (min-width:1300px) {
     .navbar__container{
         justify-content: space-evenly;
     }
+
     .second__searchbar {
         display: none;
     }
+
     .nav__list {
         width: initial;
         flex-direction: row;
         transform: translateY(0);
-
     }
     
     .nav__item {
         display: flex;
         align-items: center;
         padding:10px;
+        width: initial;
     }
     
     .nav__item:hover {
@@ -146,17 +159,17 @@ a {
         border:.5px solid  lightskyblue;
     }
 
-        .nav__list {
-            display: flex;
-            list-style: none;
-            transition: .5s ease all;
-            position: relative;
-        }
+    .nav__list {
+        display: flex;
+        list-style: none;
+        transition: .5s ease all;
+        position: relative;
+    }
 
     .add__question,.first__searchbar,.global__icon {
       display: initial;
     }
-    
+
     .toggle {
         display: none;
     }

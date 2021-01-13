@@ -19,7 +19,6 @@ function Base(props) {
         }
         getArticles()
     }, []);
-    console.log(window.location.pathname);
     return (
         <div className="home__container">
             <MemoizedSidebar />

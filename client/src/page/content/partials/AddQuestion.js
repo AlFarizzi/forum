@@ -15,7 +15,7 @@ function AddQuestion(props) {
                 title: "This Is A Title",
                 article: question
             })
-            console.log(res);
+            if(res.status === 200) alert("Artikel berhasil diposting")
         } else {
             alert("Isi Pertanyaan Dengan Benar")
         }

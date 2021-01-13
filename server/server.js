@@ -7,6 +7,7 @@ const bodyParser = require("body-parser")
 const compression = require("compression")
 const Articles = require("./router/article");
 const Search = require("./router/search")
+const Room = require("./router/rooms")
 
 app.use(compression());
 
@@ -25,6 +26,7 @@ app.post('/new-token', newToken)
 
 app.use('/articles', Articles)
 app.use('',Search)
+app.use('',Room)
 
 app.listen(9000, () => {
     console.log("Server is Connected");

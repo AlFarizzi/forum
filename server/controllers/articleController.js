@@ -10,4 +10,16 @@ const getArticles = async (req,res) => {
     }
 }
 
-module.exports = {getArticles};
+const postArticle = async (req,res) => {
+    try {
+        const {authorId,title,article} = req.body;
+        let result = await models.Article.create({
+            authorId,title,article
+        })
+        res.json(result);
+    } catch (error) {
+        throw error
+    }
+}
+
+module.exports = {getArticles, postArticle};

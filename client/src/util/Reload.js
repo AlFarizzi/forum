@@ -9,7 +9,7 @@ function Reload(props) {
     window.addEventListener("beforeunload", async(e) => {
         try {
           if(userData.refreshToken) {
-              localStorage.setItem("refresh_token", userData.refreshToken);
+              sessionStorage.setItem("refresh_token", userData.refreshToken);
              await axios.post("/authenticated",{
               refresh_token: userData.refreshToken,
               userId: userData.id,
@@ -23,7 +23,7 @@ function Reload(props) {
     })  
     window.addEventListener("DOMContentLoaded", async(e) => {
       try {
-          let token = localStorage.getItem("refresh_token")
+          let token = sessionStorage.getItem("refresh_token")
           if(token && path !== "/") {
             await axios.post('/new-token', {token})
             .then(data => {
@@ -36,7 +36,9 @@ function Reload(props) {
           } else if(!token && path !== "/") {
             history.push("/")
           }
-          localStorage.removeItem("refresh_token")
+          setTimeout(() => {
+            sessionStorage.removeItem("refresh_token")
+          }, 1000);
       } catch (error) {
         throw error
       }

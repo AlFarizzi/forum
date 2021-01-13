@@ -6,7 +6,7 @@ const {login, register, storeAuth, newToken} = require("./controllers/authentica
 const bodyParser = require("body-parser")
 const compression = require("compression")
 const Articles = require("./router/article");
-
+const Search = require("./router/search")
 
 app.use(compression());
 
@@ -24,6 +24,7 @@ app.post("/authenticated", storeAuth)
 app.post('/new-token', newToken)
 
 app.use('/articles', Articles)
+app.use('',Search)
 
 app.listen(9000, () => {
     console.log("Server is Connected");

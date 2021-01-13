@@ -15,8 +15,6 @@ function Navbar(props) {
     useEffect(() => {
         if(key) {
             history.push(`/search/${key}`)
-        } else {
-            history.push("/home")
         }
     }, [key,history]);
 

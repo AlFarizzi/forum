@@ -24,7 +24,7 @@ function Reload(props) {
     window.addEventListener("DOMContentLoaded", async(e) => {
       try {
           let token = localStorage.getItem("refresh_token")
-          if(token) {
+          if(token && path !== "/") {
             await axios.post('/new-token', {token})
             .then(data => {
                 setUserData({

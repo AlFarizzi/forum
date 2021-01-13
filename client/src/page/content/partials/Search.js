@@ -14,11 +14,12 @@ function Search(props) {
                 .then(res => {
                     setArticles(res.data);
                 })
-        },500)
+        },200)
     ) 
     useEffect(() => {
         getArticles()
-    }, [key,getArticles]);
+    }, [key]);
+    // console.log(articles);
     return (
         <div className="home__container">
             <div className="threads">

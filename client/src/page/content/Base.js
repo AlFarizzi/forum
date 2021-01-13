@@ -19,26 +19,25 @@ function Base(props) {
         }
         getArticles()
     }, []);
-    console.log(articles);
+    console.log(window.location.pathname);
     return (
         <div className="home__container">
             <MemoizedSidebar />
             <div className="threads">
-                <Suspense fallback={"Loading...."}>
                     {
                         articles.data?.map(article => {
                             return(
-                                <Card
-                                    img={`https://ui-avatars.com/api/?name=${article.author?.name}&backgroud=random`}
-                                    key={shortid.generate()}
-                                    name={article.author?.name}
-                                    username={article.author?.username}
-                                    thread={article.article}
-                                />
+                                <Suspense key={shortid.generate()} fallback={<h1>Loading.....</h1>}>
+                                    <Card
+                                        img={`https://ui-avatars.com/api/?name=${article.author?.name}&backgroud=random`}
+                                        name={article.author?.name}
+                                        username={article.author?.username}
+                                        thread={article.article}
+                                    />
+                                </Suspense>
                             )
                         })
                     }
-                </Suspense>
             </div>
         </div>
     );

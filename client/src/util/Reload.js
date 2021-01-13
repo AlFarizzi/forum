@@ -6,11 +6,10 @@ function Reload(props) {
     const path = window.location.pathname;
     const [userData,setUserData] = useRecoilState(user);
     const history = useHistory();
-    console.log(userData);
     window.addEventListener("beforeunload", async(e) => {
         try {
-          if(userData.token && path !== "/") {
-            document.cookie = `refresh_token = ${userData.refreshToken}`
+          if(userData.refreshToken) {
+              localStorage.setItem("refresh_token", userData.refreshToken);
              await axios.post("/authenticated",{
               refresh_token: userData.refreshToken,
               userId: userData.id,
@@ -24,8 +23,7 @@ function Reload(props) {
     })  
     window.addEventListener("DOMContentLoaded", async(e) => {
       try {
-          let token = document.cookie.split("refresh_token=")[1];
-          // console.log(document.cookie.split("refresh_token="))
+          let token = localStorage.getItem("refresh_token")
           if(token) {
             await axios.post('/new-token', {token})
             .then(data => {
@@ -35,12 +33,10 @@ function Reload(props) {
                   refreshToken: data.data.refresh_token
                 })
             })
-            if(path === "/" && token) {
-              history.push("/home")
-            }
           } else if(!token && path !== "/") {
             history.push("/")
           }
+          localStorage.removeItem("refresh_token")
       } catch (error) {
         throw error
       }

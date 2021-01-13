@@ -5,6 +5,7 @@ import Following from '../page/content/partials/Following';
 import PrivateRoute from './PrivateRoute';
 import { useRecoilState } from 'recoil';
 import {user} from './atom';
+import Search from '../page/content/partials/Search';
 function Router(props) {
     const [userData] = useRecoilState(user);
     return (
@@ -28,6 +29,7 @@ function Router(props) {
                     path="/following"
                     component={Following}
                 />
+                <PrivateRoute path="/search/:key" component={Search} />
             </Switch>
         </div>
     );

@@ -3,21 +3,23 @@ import '../styles/question.css'
 import {  AiOutlineClose } from 'react-icons/ai';
 import {useRecoilState} from 'recoil';
 import {user} from '../../../util/atom'
-import {ADD_ARTICLE, GET_ARTICLES} from '../../../util/query';
-import {useMutation} from 'react-apollo';
+import axios from '../../../util/axios';
 function AddQuestion(props) {
     const [userData] = useRecoilState(user);
     const [question, setQuestion] = useState("");
-    const [addArticle] = useMutation(ADD_ARTICLE);
     const clickHandler = async(e) => {
         e.preventDefault();
-            let result = addArticle({variables: {
+        if(question) {
+            let res = await axios.post('/articles/post', {
                 authorId: userData.id,
-                title: "This Is Article",
+                title: "This Is A Title",
                 article: question
-            },refetchQueries: [{query:GET_ARTICLES}]})
-            console.log(result);
+            })
+            console.log(res);
+        } else {
+            alert("Isi Pertanyaan Dengan Benar")
         }
+    }
     return (
         <div className="form__container">
             <div className="box__question">
@@ -34,7 +36,7 @@ function AddQuestion(props) {
                     <img className="profile__images" src={`https://ui-avatars.com/api/?name=${userData.username}&background=random`} alt=""/>
                     <small className="profile__name">{userData.username} bertanya</small>        
                 </span>
-                    <textarea onChange={(e) => setQuestion(e.target.value)}  className="question__input" placeholder="Awali Pertanyaan Dengan 'Apa', 'Bagaimana', 'Kenapa'">
+                    <textarea required onChange={(e) => setQuestion(e.target.value)}  className="question__input" placeholder="Awali Pertanyaan Dengan 'Apa', 'Bagaimana', 'Kenapa'">
                     </textarea>
                     <button onClick={(e) => {
                         clickHandler(e) 

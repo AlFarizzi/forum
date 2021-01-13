@@ -1,14 +1,25 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import "../styles/navbar.css";
 import {AiFillHome,AiOutlineUnorderedList,AiOutlineUsergroupDelete,AiOutlineBell} from 'react-icons/ai'
 import {BsPen} from 'react-icons/bs';
 import {FaBars} from 'react-icons/fa';
 import {FiGlobe} from 'react-icons/fi';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 function Navbar(props) {
+    const history = useHistory();
+    const [key, setKey] = useState();
     const clickHandler = () => {
         document.getElementById("navbar").classList.toggle("show")
     }
+    
+    useEffect(() => {
+        if(key) {
+            history.push(`/search/${key}`)
+        } else {
+            history.push("/home")
+        }
+    }, [key,history]);
+
     return (
         <div className="navbar__container">
             <img src="https://www.vectorlogo.zone/logos/quora/quora-ar21.svg" alt=""/>
@@ -20,10 +31,10 @@ function Navbar(props) {
                 <NavLink to="/spaces"><li className="nav__item"><AiOutlineUsergroupDelete size={20}/> Ruang</li></NavLink>
                 <NavLink to="/notifications"><li className="nav__item"><AiOutlineBell size={20} /> Notifikasi</li></NavLink>
                 <li className="second__searchbar">
-                    <input type="text" className="search__bar" placeholder="Cari"/>
+                    <input type="text" onChange={(e) => setKey(e.target.value)} className="search__bar" placeholder="Cari"/>
                 </li>
             </ul>
-            <input type="text" className="first__searchbar search__bar" placeholder="Cari"/>
+            <input onChange={(e) => setKey(e.target.value)} type="text" className="first__searchbar search__bar" placeholder="Cari"/>
             <FiGlobe fontSize={30} className="global__icon"/>
             <button className="add__question" onClick={props.show}>Tambah Pertanyaan</button>
         </div>

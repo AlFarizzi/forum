@@ -1,0 +1,26 @@
+.room__container {
+    padding:10px 0;
+    margin-top: 50px;
+}
+
+.room__detail__banner {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+}
+
+.room__profile__image__detail {
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    border-radius: 50%;
+}
+
+.threads {
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

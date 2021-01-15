@@ -1,0 +1,60 @@
+.rooms__container {
+    margin-top: 50px;
+    padding:10px 20px;
+}
+
+.room__slogan {
+    font-family: sans-serif;
+    font-size: 2rem;
+}
+
+.room__list {
+    display: flex;
+    flex-wrap: wrap;
+    padding:20px 0;
+}
+
+.room {
+    width: 179px;
+    height: 244px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 15px  lightgrey;
+    margin-left: 10px;
+}
+
+.room__banner {
+    margin-top: -20px;
+    border-radius: 10px 10px 0 0;
+    height: 60px;
+    background-image: url('https://source.unsplash.com/user/korpa/likes');
+    background-size: cover;
+}
+
+.profile__image {
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin:30px 35%;
+}
+
+.room__title {
+    /* border:1px solid red; */
+    margin-top: 15%;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.room__explained {
+    /* border:1px solid red; */
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 12px;
+    margin-top: 3%;
+    letter-spacing: 1.5px;
+}
+

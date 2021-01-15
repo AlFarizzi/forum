@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   RoomArticle.associate = function(models) {
     RoomArticle.belongsTo(models.Room, {foreignKey: 'roomId', as: 'room'})
+    RoomArticle.belongsTo(models.User, {foreignKey:'authorId', as: 'author'})
   }
   return RoomArticle;
 };

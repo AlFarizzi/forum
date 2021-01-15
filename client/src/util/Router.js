@@ -6,6 +6,8 @@ import PrivateRoute from './PrivateRoute';
 import { useRecoilState } from 'recoil';
 import {user} from './atom';
 import Search from '../page/content/partials/Search';
+import Rooms from '../page/content/partials/Rooms';
+import Room from '../page/content/partials/Room';
 function Router(props) {
     const [userData] = useRecoilState(user);
     return (
@@ -30,6 +32,8 @@ function Router(props) {
                     component={Following}
                 />
                 <PrivateRoute path="/search/:key" component={Search} />
+                <PrivateRoute path="/rooms" component={Rooms} />
+                <PrivateRoute path="/room/:id/:roomName" component={Room} /> 
             </Switch>
         </div>
     );

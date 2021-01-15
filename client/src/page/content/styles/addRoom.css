@@ -1,0 +1,88 @@
+.form__container {
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.637);
+    position: fixed;
+    top:0;
+    left:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close__button {
+    position: absolute;
+    right: 3%;
+    top:3%;
+    color:grey;
+}
+
+.close__button:hover {
+    color:black;
+    cursor: pointer;
+}
+
+.box__question {
+    width: 50%;
+    height: 400px;
+    background-color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.room__instruction {
+    margin-top: 7%;
+}
+
+.header1,.header2 {
+    font-family: sans-serif;
+}
+
+.header2 {
+    font-size: 14px;
+    color: rgb(161, 159, 159);
+}
+
+.room__detail__data {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+}
+
+.data__name {
+    padding: 10px 35px;
+}
+
+.room__name {
+    width: 90%;
+    height: 30px;
+    border:0;
+    border-bottom: 1px solid lightgrey;
+    font-family: sans-serif;
+    padding:5px;
+}
+
+.room__name:focus {
+    outline: none;
+}
+
+.room__button {
+    align-self: flex-start;
+    margin-left: 30px;
+    padding:10px 20px;
+    border-radius: 10px;
+    border:0;
+    background-color: #96b4ff;
+    color:white;
+    font-weight: 700;
+    font-family: sans-serif;
+}
+
+.room__button:hover {
+    cursor: pointer;
+}

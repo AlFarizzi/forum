@@ -15,14 +15,14 @@ module.exports = (sequelize, DataTypes) => {
   };
   Room.init({
     roomName: DataTypes.STRING,
-    roomOwnerId: DataTypes.INTEGER
+    roomOwnerId: DataTypes.INTEGER,
+    roomDescription: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Room',
   });
   Room.associate = function(models) {
     Room.belongsTo(models.User, {foreignKey:"roomOwnerId", as:"owner"})
-    Room.hasMany(models.RoomArticle, {foreignKey: 'roomId', as: "articles"})
   }
   return Room;
 };

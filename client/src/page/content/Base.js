@@ -28,7 +28,7 @@ function Base(props) {
                             return(
                                 <Suspense key={shortid.generate()} fallback={<h1>Loading.....</h1>}>
                                     <Card
-                                        img={`https://ui-avatars.com/api/?name=${article.author?.name}&backgroud=random`}
+                                        img={`https://avatars.dicebear.com/api/avataaars/${shortid.generate()}.svg`}
                                         name={article.author?.name}
                                         username={article.author?.username}
                                         thread={article.article}

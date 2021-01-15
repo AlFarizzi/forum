@@ -24,7 +24,7 @@ function AddRoom(props) {
 
     return (
         <div className="form__container">
-            <div className="box__question">
+            <div className="box__question2">
                 <AiOutlineClose size={20} className="close__button" onClick={props.room}/>
                 <div className="room__instruction">
                     <h3 className="header1">Buat ruang</h3>

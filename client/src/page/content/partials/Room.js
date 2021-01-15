@@ -18,8 +18,8 @@ function Room(props) {
         }
         getDetails()
         setbgImg('https://source.unsplash.com/random');
+        localStorage.setItem("roomId", id)
     }, []);
-    console.log(details);
     return (
         <div className="room__container">
             <div style={{backgroundImage:`url("${bgImg}")`}} className="room__detail__banner">

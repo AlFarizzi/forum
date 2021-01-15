@@ -7,14 +7,24 @@ import axios from '../../../util/axios';
 function AddQuestion(props) {
     const [userData] = useRecoilState(user);
     const [question, setQuestion] = useState("");
+    const path = window.location.pathname;
+    let res;
     const clickHandler = async(e) => {
         e.preventDefault();
         if(question) {
-            let res = await axios.post('/articles/post', {
-                authorId: userData.id,
-                title: "This Is A Title",
-                article: question
-            })
+            if(path === "/home") {
+                res = await axios.post('/articles/post', {
+                    authorId: userData.id,
+                    title: "This Is A Title",
+                    article: question
+                })
+            } else {
+                res = await axios.post('rooms/article/post',{
+                    authorId: userData.id,
+                    article: question,
+                    roomId: localStorage.getItem("roomId")
+                })
+            }
             if(res.status === 200) alert("Artikel berhasil diposting")
         } else {
             alert("Isi Pertanyaan Dengan Benar")

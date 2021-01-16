@@ -13,6 +13,7 @@ function Room(props) {
     const [following,setFollowing] = useState(false);
     const [userData] = useRecoilState(user);
     let check = details?.data?.check;
+
     const followHandler = async (e) => {
         e.preventDefault();
         try {
@@ -23,9 +24,16 @@ function Room(props) {
             throw error
         }
     }
+
     const unfollowHandler = async(e) => {
-        console.log(("Berhenti Mengikuti"))
+        try {
+            let res = await axios.get(`room/unfollow/${userData.id}/${id}`)
+            if(res.data === 1) setFollowing(false);
+        } catch (error) {
+            throw error
+        }
     }
+
     useEffect(() => {
         const getDetails = async() => {
             try {
@@ -40,8 +48,8 @@ function Room(props) {
         }
         getDetails()
         setbgImg('https://source.unsplash.com/random');
-        localStorage.setItem("roomId", id)
-    }, [id]);
+        // localStorage.setItem("roomId", id)
+    }, [id, userData.id]);
     console.log(check);
     return (
         <div className="room__container">

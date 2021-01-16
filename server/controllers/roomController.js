@@ -1,4 +1,6 @@
-const models = require("../models")
+const models = require("../models");
+const { Sequelize } = require("../models");
+const op = Sequelize.Op;
 
 const check = async(checkRoom) => {
     try {
@@ -118,4 +120,20 @@ const followRoom = async(req,res) => {
     }
 }
 
-module.exports = {postRoom, ownerRoom, roomDetail, postRoomArticle, getRooms, followRoom}
+const unfollowRoom = async(req,res) => {
+    try {   
+        let result = await models.FollowingRoom.destroy({
+            where: {
+                [op.and] : {
+                    userId: req.params.userId,
+                    roomId:req.params.roomId
+                }
+            }
+        })
+        res.json(result);
+    } catch (error) {
+        throw error
+    }
+}
+
+module.exports = {postRoom, ownerRoom, roomDetail, postRoomArticle, getRooms, followRoom,unfollowRoom}

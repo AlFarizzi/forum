@@ -3,7 +3,6 @@ import "../styles/navbar.css";
 import {AiFillHome,AiOutlineUnorderedList,AiOutlineUsergroupDelete,AiOutlineBell} from 'react-icons/ai'
 import {BsPen} from 'react-icons/bs';
 import {FaBars} from 'react-icons/fa';
-import {FiGlobe} from 'react-icons/fi';
 import {NavLink, useHistory} from 'react-router-dom';
 function Navbar(props) {
     const history = useHistory();

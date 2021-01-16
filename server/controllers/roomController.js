@@ -13,6 +13,19 @@ const check = async(checkRoom) => {
     }
 }
 
+const checkFollowRoom = async(userId,roomId) => {
+    try {
+        let result = await models.FollowingRoom.findOne({
+            where: {
+                userId,roomId
+            }
+        })
+        return result
+    } catch (error) {
+        throw error
+    }
+}
+
 const postRoom = async (req,res) => {
     try {
         let result = await check(req.body.roomName)
@@ -55,8 +68,9 @@ const roomDetail = async(req,res) => {
                 roomId: req.params.id
             }, include:['author']
         })
+        let check = await checkFollowRoom(req.headers["identifier"],req.params.id)
         let result= {
-            room,articles
+            room,articles, check
         }
         res.json(result)
     } catch (error) {
@@ -84,4 +98,24 @@ const getRooms = async(req,res) => {
     }
 }
 
-module.exports = {postRoom, ownerRoom, roomDetail, postRoomArticle, getRooms}
+const followRoom = async(req,res) => {
+    try {
+        const {userId,roomId} = req.body;
+        const check = await checkFollowRoom(userId,roomId);
+        if(check === null) {
+            let result = await models.FollowingRoom.create({
+                userId,roomId
+            })
+            res.json(result);
+        } else {
+            res.json({
+                status: 422,
+                message: "Ruang Ini Sudah Kamu Ikuti"
+            })
+        }
+    } catch (error) {
+        throw error
+    }
+}
+
+module.exports = {postRoom, ownerRoom, roomDetail, postRoomArticle, getRooms, followRoom}

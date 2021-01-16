@@ -1,17 +1,39 @@
 import React, {useEffect, useState, Suspense} from 'react';
+import {useRecoilState} from 'recoil'
+import {user} from '../../../util/atom' 
 import {useParams} from 'react-router-dom'
 import axios from '../../../util/axios';
 import '../styles/room.css'
 import shortid from 'shortid';
 import Card from './Card'
 function Room(props) {
-    const {id,roomName} = useParams();
+    const {id} = useParams();
     const [details, setDetails] = useState([]);
     const [bgImg, setbgImg] = useState('');
+    const [following,setFollowing] = useState(false);
+    const [userData] = useRecoilState(user);
+    let check = details?.data?.check;
+    const followHandler = async (e) => {
+        e.preventDefault();
+        try {
+            let res = await axios.post('room/follow', {userId:userData.id, roomId:id})
+            res ? setFollowing(true) : setFollowing(false);
+        }
+         catch (error) {
+            throw error
+        }
+    }
+    const unfollowHandler = async(e) => {
+        console.log(("Berhenti Mengikuti"))
+    }
     useEffect(() => {
         const getDetails = async() => {
             try {
-                setDetails(await axios.get(`rooms/${id}`))
+                setDetails(await axios.get(`rooms/${id}`, {
+                    headers: {
+                       "identifier":userData.id
+                    }
+                }))
             } catch (error) {
                 throw error
             }
@@ -19,11 +41,15 @@ function Room(props) {
         getDetails()
         setbgImg('https://source.unsplash.com/random');
         localStorage.setItem("roomId", id)
-    }, []);
+    }, [id]);
+    console.log(check);
     return (
         <div className="room__container">
             <div style={{backgroundImage:`url("${bgImg}")`}} className="room__detail__banner">
                 <img  className="room__profile__image__detail" src="https://source.unsplash.com/user/korpa" alt="profile"/>
+                <button className="follow__button" onClick={check || following ? unfollowHandler : followHandler}>
+                    {check || following ? "Berhenti Mengikuti" : "Ikuti"}
+                </button>
             </div>
             <div className="threads">
                 {
@@ -32,7 +58,7 @@ function Room(props) {
                         return(
                             <Suspense key={shortid.generate()} fallback={<h1>Loading...</h1>}>
                             <Card
-                                    img={`https://ui-avatars.com/api/?name=${article.author?.name}&backgroud=random`}
+                                    img={`https://avatars.dicebear.com/api/avataaars/${shortid.generate()}.svg`}
                                     name={article.author?.name}
                                     username={article.author?.username}
                                     thread={article.article}

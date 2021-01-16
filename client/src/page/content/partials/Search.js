@@ -19,22 +19,21 @@ function Search(props) {
     useEffect(() => {
         getArticles()
     }, [key]);
-    // console.log(articles);
     return (
         <div className="home__container">
             <div className="threads">
                     {
                         articles.map(article => {
                             return(
-                                    <Suspense key={shortid.generate()} fallback={<h1>Loading...</h1>}>
-                                        <Card
-                                            img={`https://ui-avatars.com/api/?name=${article.author?.name}&backgroud=random`}
-                                            key={shortid.generate()}
-                                            name={article.author?.name}
-                                            username={article.author?.username}
-                                            thread={article.article}
-                                        />
-                                    </Suspense>
+                                <Suspense key={shortid.generate()} fallback={<h1>Loading...</h1>}>
+                                    <Card
+                                        img={`https://ui-avatars.com/api/?name=${article.author?.name}&backgroud=random`}
+                                        key={shortid.generate()}
+                                        name={article.author?.name}
+                                        username={article.author?.username}
+                                        thread={article.article}
+                                    />
+                                </Suspense>
                             )
                         })
                     }

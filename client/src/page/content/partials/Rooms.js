@@ -1,6 +1,5 @@
 import React,{useEffect,useState, Suspense} from 'react';
 import axios from '../../../util/axios'
-import {Link} from 'react-router-dom';
 import shortId from 'shortid'
 import '../styles/rooms.css'
 function Rooms(props) {
@@ -12,7 +11,8 @@ function Rooms(props) {
     useEffect(() => {
         const getRooms = async () => {
             try {
-                setRooms(await axios.get('/rooms'))
+                let res = await axios.get("/rooms");
+                setRooms(res.data);
             } catch (error) {
                 throw error
             }
@@ -24,7 +24,7 @@ function Rooms(props) {
             <h5 className="room__slogan">Temukan Ruang</h5>
             <div className="room__list">
                 {
-                    rooms?.data?.map(room => {
+                    rooms.map(room => {
                         return(
                             <Suspense fallback={<h1>Loading ....</h1>} key={shortId.generate()}>
                                 <a className="room__link" href={`/room/${room.id}/${room.roomName}`}>

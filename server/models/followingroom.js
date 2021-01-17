@@ -20,5 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'FollowingRoom',
   });
+  FollowingRoom.associate = function(models) {
+    FollowingRoom.belongsTo(models.Room, {foreignKey:'roomId', as:"rooms"})
+  }
   return FollowingRoom;
 };

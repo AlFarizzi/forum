@@ -1,7 +1,6 @@
 import {Switch,Route} from 'react-router-dom';
 import Base from '../page/auth/Base';
 import Home from '../page/content/Base';
-import Following from '../page/content/partials/Following';
 import PrivateRoute from './PrivateRoute';
 import { useRecoilState } from 'recoil';
 import {user} from './atom';
@@ -14,7 +13,7 @@ function Router(props) {
         <div>
             <Switch>
                 {
-                    !userData.token
+                    userData.token === ""
                     ? (
                         <>
                             <Route exact path="/">
@@ -29,7 +28,7 @@ function Router(props) {
                 />
                 <PrivateRoute
                     path="/following"
-                    component={Following}
+                    component={Rooms}
                 />
                 <PrivateRoute path="/search/:key" component={Search} />
                 <PrivateRoute path="/rooms" component={Rooms} />

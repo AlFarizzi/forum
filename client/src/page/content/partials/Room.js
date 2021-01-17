@@ -10,15 +10,14 @@ function Room(props) {
     const {id} = useParams();
     const [details, setDetails] = useState([]);
     const [bgImg, setbgImg] = useState('');
-    const [following,setFollowing] = useState(false);
     const [userData] = useRecoilState(user);
     let check = details?.data?.check;
 
     const followHandler = async (e) => {
         e.preventDefault();
         try {
-            let res = await axios.post('room/follow', {userId:userData.id, roomId:id})
-            res ? setFollowing(true) : setFollowing(false);
+            await axios.post('room/follow', {userId:userData.id, roomId:id})
+            window.location.reload()
         }
          catch (error) {
             throw error
@@ -27,8 +26,8 @@ function Room(props) {
 
     const unfollowHandler = async(e) => {
         try {
-            let res = await axios.get(`room/unfollow/${userData.id}/${id}`)
-            if(res.data === 1) setFollowing(false);
+            await axios.get(`room/unfollow/${userData.id}/${id}`)
+            window.location.reload()
         } catch (error) {
             throw error
         }
@@ -48,15 +47,14 @@ function Room(props) {
         }
         getDetails()
         setbgImg('https://source.unsplash.com/random');
-        // localStorage.setItem("roomId", id)
-    }, [id, userData.id]);
-    console.log(check);
+    }, [id,userData.id]);
+
     return (
         <div className="room__container">
             <div style={{backgroundImage:`url("${bgImg}")`}} className="room__detail__banner">
                 <img  className="room__profile__image__detail" src="https://source.unsplash.com/user/korpa" alt="profile"/>
-                <button className="follow__button" onClick={check || following ? unfollowHandler : followHandler}>
-                    {check || following ? "Berhenti Mengikuti" : "Ikuti"}
+                <button className="follow__button" onClick={check ? unfollowHandler : followHandler}>
+                    {check ? "Berhenti Mengikuti" : "Ikuti"}
                 </button>
             </div>
             <div className="threads">

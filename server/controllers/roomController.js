@@ -93,7 +93,17 @@ const postRoomArticle = async(req,res) => {
 
 const getRooms = async(req,res) => {
     try {
-        let result = await models.Room.findAll();
+        let result;
+        let headers = req.headers["identifier"];
+        if(headers === undefined) {
+            result = await models.Room.findAll();
+        } else {
+            result = await models.FollowingRoom.findAll({
+                where: {
+                    userId:20
+                }, include: ["rooms"]
+            })
+        }
         res.json(result);
     } catch (error) {
         throw error

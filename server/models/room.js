@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   Room.associate = function(models) {
     Room.belongsTo(models.User, {foreignKey:"roomOwnerId", as:"owner"})
+    Room.hasOne(models.FollowingRoom, {foreignKey:'roomId', as:'FollowingRooms'})
   }
   return Room;
 };
